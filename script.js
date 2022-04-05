@@ -9,7 +9,7 @@ function computerPlay() {
   }
 }
 
-function round(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
   playerSelection = prompt("Please enter your guess").toLowerCase();
   computerSelection = computerPlay().toLowerCase();
   if (
@@ -27,4 +27,4 @@ function round(playerSelection, computerSelection) {
   } else return "It's a tie!";
 }
 
-console.log(round());
+console.log(playRound());
