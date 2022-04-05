@@ -27,4 +27,11 @@ function playRound(playerSelection, computerSelection) {
   } else return "It's a tie!";
 }
 
-console.log(playRound());
+function game(numberOfRounds) {
+  for (let i = 0; i < numberOfRounds; i++) {
+    console.log(`Round ${i + 1}. ${playRound()}`);
+  }
+  return;
+}
+
+game(5);
