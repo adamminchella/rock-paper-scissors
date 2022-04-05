@@ -9,19 +9,25 @@ function computerPlay() {
   }
 }
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 function playRound(playerSelection, computerSelection) {
-  playerSelection = prompt("Please enter your guess").toLowerCase();
-  computerSelection = computerPlay().toLowerCase();
+  playerSelection = capitalizeFirstLetter(
+    prompt("Please enter your guess").toLowerCase()
+  );
+  computerSelection = capitalizeFirstLetter(computerPlay().toLowerCase());
   if (
-    (playerSelection === "rock" && computerSelection === "scissors") ||
-    (playerSelection === "paper" && computerSelection === "rock") ||
-    (playerSelection === "scissors" && computerSelection === "paper")
+    (playerSelection === "Rock" && computerSelection === "Scissors") ||
+    (playerSelection === "Paper" && computerSelection === "Rock") ||
+    (playerSelection === "Scissors" && computerSelection === "Paper")
   ) {
     return `You win! ${playerSelection} beats ${computerSelection}!`;
   } else if (
-    (playerSelection === "rock" && computerSelection === "paper") ||
-    (playerSelection === "paper" && computerSelection === "scissors") ||
-    (playerSelection === "scissors" && computerSelection === "rock")
+    (playerSelection === "Rock" && computerSelection === "Paper") ||
+    (playerSelection === "Paper" && computerSelection === "Scissors") ||
+    (playerSelection === "Scissors" && computerSelection === "Rock")
   ) {
     return `You lose! ${computerSelection} beats ${playerSelection}!`;
   } else return "It's a tie!";
