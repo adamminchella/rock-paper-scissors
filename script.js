@@ -19,6 +19,13 @@ function playRound(playerSelection, computerSelection) {
   );
   computerSelection = capitalizeFirstLetter(computerPlay().toLowerCase());
   if (
+    playerSelection !== "Rock" &&
+    playerSelection !== "Paper" &&
+    playerSelection !== "Scissors"
+  ) {
+    return false;
+  }
+  if (
     (playerSelection === "Rock" && computerSelection === "Scissors") ||
     (playerSelection === "Paper" && computerSelection === "Rock") ||
     (playerSelection === "Scissors" && computerSelection === "Paper")
@@ -35,7 +42,11 @@ function playRound(playerSelection, computerSelection) {
 
 function game(numberOfRounds) {
   for (let i = 0; i < numberOfRounds; i++) {
-    console.log(`Round ${i + 1}. ${playRound()}`);
+    let roundResult = playRound();
+    if (roundResult === false) {
+      console.log("Fuck you, enter a valid guess");
+      i--;
+    } else console.log(`Round ${i + 1}. ${roundResult}`);
   }
   return;
 }
