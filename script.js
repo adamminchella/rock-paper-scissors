@@ -14,17 +14,8 @@ function capitalizeFirstLetter(string) {
 }
 
 function playRound(playerSelection, computerSelection) {
-  playerSelection = capitalizeFirstLetter(
-    prompt("Please enter your guess").toLowerCase()
-  );
+  playerSelection = findPlayerSelection();
   computerSelection = capitalizeFirstLetter(computerPlay().toLowerCase());
-  if (
-    playerSelection !== "Rock" &&
-    playerSelection !== "Paper" &&
-    playerSelection !== "Scissors"
-  ) {
-    return false;
-  }
   if (
     (playerSelection === "Rock" && computerSelection === "Scissors") ||
     (playerSelection === "Paper" && computerSelection === "Rock") ||
@@ -37,18 +28,25 @@ function playRound(playerSelection, computerSelection) {
     (playerSelection === "Scissors" && computerSelection === "Rock")
   ) {
     return `You lose! ${computerSelection} beats ${playerSelection}!`;
-  } else return "It's a tie!";
+  } else "It's a tie!";
 }
 
-function game(numberOfRounds) {
-  for (let i = 0; i < numberOfRounds; i++) {
-    let roundResult = playRound();
-    if (roundResult === false) {
-      console.log("Fuck you, enter a valid guess");
-      i--;
-    } else console.log(`Round ${i + 1}. ${roundResult}`);
+const rock = document.querySelector(".rock");
+const paper = document.querySelector(".paper");
+const scissors = document.querySelector(".scissors");
+
+rock.addEventListener("click", playRound);
+paper.addEventListener("click", playRound);
+scissors.addEventListener("click", playRound);
+
+function findPlayerSelection() {
+  if (rock.classList.contains("rock")) {
+    return (playerSelection = "Rock");
   }
-  return;
+  if (rock.classList.contains("paper")) {
+    return (playerSelection = "Paper");
+  }
+  if (rock.classList.contains("scissors")) {
+    return (playerSelection = "Scissors");
+  }
 }
-
-game(5);
