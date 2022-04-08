@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+}
+
+.content {
+  text-align: center;
+}
+
+.image-container {
+  width: 70vw;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+.images {
+  width: 100px;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+}
+
+.player__score,
+.computer__score {
+  margin: 20px;
+}
