@@ -6,14 +6,14 @@ body {
   text-align: center;
 }
 
-.image-container {
+.images {
   width: 70vw;
   margin: auto;
   display: flex;
   justify-content: space-around;
 }
 
-.images {
+.image {
   width: 100px;
 }
 

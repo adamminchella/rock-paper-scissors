@@ -1,6 +1,4 @@
-const rock = document.querySelector(".rock");
-const paper = document.querySelector(".paper");
-const scissors = document.querySelector(".scissors");
+const images = document.querySelectorAll(".image");
 const restart = document.querySelector(".restart");
 let playerScore = document.querySelector(".player__score");
 let computerScore = document.querySelector(".computer__score");
@@ -9,9 +7,10 @@ let tryAgain = document.querySelector(".try-again");
 playerScore.innerHTML = 0;
 computerScore.innerHTML = 0;
 
-rock.addEventListener("click", () => playRound("Rock"));
-paper.addEventListener("click", () => playRound("Paper"));
-scissors.addEventListener("click", () => playRound("Scissors"));
+images.forEach((image) => {
+  image.addEventListener("click", () => playRound(image.id));
+});
+
 restart.addEventListener("click", restartGame);
 tryAgain.addEventListener("click", restartGame);
 
@@ -34,6 +33,7 @@ function playRound(playerSelection) {
   if (isGameOver()) {
     return;
   }
+  playerSelection = capitalizeFirstLetter(playerSelection);
   computerSelection = capitalizeFirstLetter(computerPlay().toLowerCase());
   if (
     (playerSelection === "Rock" && computerSelection === "Scissors") ||
@@ -42,7 +42,7 @@ function playRound(playerSelection) {
   ) {
     playerScore.innerHTML++;
     if (isGameOver()) {
-      showButton();
+      tryAgain.classList.remove("try-again");
       return (remark.innerHTML = "Congrats, you've fucked the pc");
     }
     remark.innerHTML = `You win! ${playerSelection} beats ${computerSelection}!`;
@@ -55,7 +55,7 @@ function playRound(playerSelection) {
   ) {
     computerScore.innerHTML++;
     if (isGameOver()) {
-      showButton();
+      tryAgain.classList.remove("try-again");
       return (remark.innerHTML = "Oh dear, you've been truly fucked");
     }
     remark.innerHTML = `You lose! ${computerSelection} beats ${playerSelection}!`;
@@ -68,19 +68,13 @@ function restartGame() {
   remark.innerHTML = "";
   playerScore.innerHTML = 0;
   computerScore.innerHTML = 0;
-  hideButton();
+  if (!tryAgain.classList.contains("try-again")) {
+    tryAgain.classList.add("try-again");
+  }
 }
 
 function isGameOver() {
   if (playerScore.innerHTML == "5" || computerScore.innerHTML == "5") {
     return true;
   }
-}
-
-function showButton() {
-  tryAgain.setAttribute("style", "display: initial");
-}
-
-function hideButton() {
-  tryAgain.setAttribute("style", "display: none");
 }
