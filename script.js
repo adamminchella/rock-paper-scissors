@@ -4,14 +4,29 @@ let playerScore = document.querySelector(".player__score");
 let computerScore = document.querySelector(".computer__score");
 let remark = document.querySelector(".remark");
 let tryAgain = document.querySelector(".try-again");
+let startGame = document.querySelector(".start-game");
+let scoreboard = document.querySelector(".scoreboard");
+let endgame = document.querySelector(".endgame");
+let input = document.querySelector(".rounds");
 playerScore.innerHTML = 0;
 computerScore.innerHTML = 0;
 
 images.forEach((image) => {
   image.addEventListener("click", () => playRound(image.id));
 });
+
+startGame.addEventListener("click", setupGame);
 restart.addEventListener("click", restartGame);
 tryAgain.addEventListener("click", retry);
+
+function setupGame() {
+  numberOfRounds = input.value;
+  input.classList.add("hidden");
+  scoreboard.classList.remove("hidden");
+  startGame.classList.add("hidden");
+  remark.innerHTML = "";
+  endgame.classList.remove("top-margin");
+}
 
 function computerPlay() {
   let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -73,6 +88,8 @@ function restartGame() {
   input.classList.remove("hidden");
   scoreboard.classList.add("hidden");
   startGame.classList.remove("hidden");
+  endgame.classList.add("top-margin");
+  input.value = "";
 }
 
 function retry() {
@@ -91,18 +108,4 @@ function isGameOver() {
   ) {
     return true;
   }
-}
-
-let startGame = document.querySelector(".start-game");
-let scoreboard = document.querySelector(".scoreboard");
-let input = document.querySelector(".rounds");
-
-startGame.addEventListener("click", setupGame);
-
-function setupGame() {
-  numberOfRounds = input.value;
-  input.classList.add("hidden");
-  scoreboard.classList.remove("hidden");
-  startGame.classList.add("hidden");
-  remark.innerHTML = "";
 }
