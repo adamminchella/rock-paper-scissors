@@ -28,20 +28,26 @@
         />
       </div>
       <div class="endgame">
-        <p class="remark"></p>
-        <button class="try-again">Try Again!</button>
+        <p class="remark">First to ..?</p>
+        <input type="number" name="hi" class="rounds" />
+        <button class="hidden try-again">Try Again!</button>
       </div>
       <div>
-        <div class="tally">
-          <h2>Your Score</h2>
-          <h2>Computer Score</h2>
-        </div>
-        <div class="score">
-          <p class="player__score"></p>
-          <p class="computer__score"></p>
-        </div>
+        <button class="start-game">Start game</button>
       </div>
-      <button class="restart">Restart Game</button>
+      <div class="scoreboard hidden">
+        <div>
+          <div class="tally">
+            <h2>Your Score</h2>
+            <h2>Computer Score</h2>
+          </div>
+          <div class="score">
+            <p class="player__score"></p>
+            <p class="computer__score"></p>
+          </div>
+        </div>
+        <button class="restart">Restart Game</button>
+      </div>
     </div>
     <script src="./script.js"></script>
   </body>

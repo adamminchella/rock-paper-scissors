@@ -96,6 +96,6 @@ button {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
-.try-again {
+.hidden {
   display: none;
 }

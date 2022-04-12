@@ -11,7 +11,7 @@ images.forEach((image) => {
   image.addEventListener("click", () => playRound(image.id));
 });
 restart.addEventListener("click", restartGame);
-tryAgain.addEventListener("click", restartGame);
+tryAgain.addEventListener("click", retry);
 
 function computerPlay() {
   let randomNumber = Math.floor(Math.random() * 3) + 1;
@@ -41,7 +41,7 @@ function playRound(playerSelection) {
   ) {
     playerScore.innerHTML++;
     if (isGameOver()) {
-      tryAgain.classList.remove("try-again");
+      tryAgain.classList.remove("hidden");
       return (remark.innerHTML = "Congrats, you've fucked the pc");
     }
     remark.innerHTML = `You win! ${playerSelection} beats ${computerSelection}!`;
@@ -54,7 +54,7 @@ function playRound(playerSelection) {
   ) {
     computerScore.innerHTML++;
     if (isGameOver()) {
-      tryAgain.classList.remove("try-again");
+      tryAgain.classList.remove("hidden");
       return (remark.innerHTML = "Oh dear, you've been truly fucked");
     }
     remark.innerHTML = `You lose! ${computerSelection} beats ${playerSelection}!`;
@@ -64,16 +64,45 @@ function playRound(playerSelection) {
 }
 
 function restartGame() {
+  remark.innerHTML = "First to ..?";
+  playerScore.innerHTML = 0;
+  computerScore.innerHTML = 0;
+  if (!tryAgain.classList.contains("hidden")) {
+    tryAgain.classList.add("hidden");
+  }
+  input.classList.remove("hidden");
+  scoreboard.classList.add("hidden");
+  startGame.classList.remove("hidden");
+}
+
+function retry() {
   remark.innerHTML = "";
   playerScore.innerHTML = 0;
   computerScore.innerHTML = 0;
-  if (!tryAgain.classList.contains("try-again")) {
-    tryAgain.classList.add("try-again");
+  if (!tryAgain.classList.contains("hidden")) {
+    tryAgain.classList.add("hidden");
   }
 }
 
 function isGameOver() {
-  if (playerScore.innerHTML == "5" || computerScore.innerHTML == "5") {
+  if (
+    playerScore.innerHTML == numberOfRounds ||
+    computerScore.innerHTML == numberOfRounds
+  ) {
     return true;
   }
+}
+
+let startGame = document.querySelector(".start-game");
+let scoreboard = document.querySelector(".scoreboard");
+let input = document.querySelector(".rounds");
+
+startGame.addEventListener("click", setupGame);
+
+function setupGame() {
+  numberOfRounds = input.value;
+  input.classList.add("hidden");
+  scoreboard.classList.remove("hidden");
+  startGame.classList.add("hidden");
+  remark.innerHTML = "";
 }
