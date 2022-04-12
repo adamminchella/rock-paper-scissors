@@ -26,3 +26,12 @@ body {
 .computer__score {
   margin: 20px;
 }
+
+.endgame {
+  display: flex;
+  justify-content: center;
+}
+
+.try-again {
+  display: none;
+}
