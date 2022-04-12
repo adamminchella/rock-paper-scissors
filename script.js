@@ -10,7 +10,6 @@ computerScore.innerHTML = 0;
 images.forEach((image) => {
   image.addEventListener("click", () => playRound(image.id));
 });
-
 restart.addEventListener("click", restartGame);
 tryAgain.addEventListener("click", restartGame);
 
