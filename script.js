@@ -10,6 +10,7 @@ let endgame = document.querySelector(".endgame");
 let input = document.querySelector(".rounds");
 playerScore.innerHTML = 0;
 computerScore.innerHTML = 0;
+let isGameInProgress = false;
 
 images.forEach((image) => {
   image.addEventListener("click", () => playRound(image.id));
@@ -20,6 +21,10 @@ restart.addEventListener("click", restartGame);
 tryAgain.addEventListener("click", retry);
 
 function setupGame() {
+  if (input.value == "") {
+    return;
+  }
+  isGameInProgress = true;
   numberOfRounds = input.value;
   input.classList.add("hidden");
   scoreboard.classList.remove("hidden");
@@ -44,7 +49,7 @@ function capitalizeFirstLetter(string) {
 }
 
 function playRound(playerSelection) {
-  if (isGameOver()) {
+  if (!isGameInProgress) {
     return;
   }
   playerSelection = capitalizeFirstLetter(playerSelection);
@@ -57,6 +62,7 @@ function playRound(playerSelection) {
     playerScore.innerHTML++;
     if (isGameOver()) {
       tryAgain.classList.remove("hidden");
+      isGameInProgress = false;
       return (remark.innerHTML = "Congrats, you've fucked the pc");
     }
     remark.innerHTML = `You win! ${playerSelection} beats ${computerSelection}!`;
@@ -70,6 +76,7 @@ function playRound(playerSelection) {
     computerScore.innerHTML++;
     if (isGameOver()) {
       tryAgain.classList.remove("hidden");
+      isGameInProgress = false;
       return (remark.innerHTML = "Oh dear, you've been truly fucked");
     }
     remark.innerHTML = `You lose! ${computerSelection} beats ${playerSelection}!`;
@@ -90,9 +97,11 @@ function restartGame() {
   startGame.classList.remove("hidden");
   endgame.classList.add("top-margin");
   input.value = "";
+  isGameInProgress = false;
 }
 
 function retry() {
+  isGameInProgress = true;
   remark.innerHTML = "";
   playerScore.innerHTML = 0;
   computerScore.innerHTML = 0;
